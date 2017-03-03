@@ -53,7 +53,7 @@ public abstract class Dec2Num implements Conversion {
 
         r = (int) (n % this.base);
         long newval = n / this.base;
-        resultsteps.add(n + " divided by 2 = " + this.base + " = "  + newval + " w/remainder of: " + r);
+        resultsteps.add(n + " divided by " + this.base + " = "  + newval + " w/remainder of: " + r);
 
         if (newval > 0) {
             convertByRecur(newval);     // recursive call

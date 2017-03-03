@@ -3,6 +3,7 @@ package numcconv;
 import business.Bin2Dec;
 import business.Conversion;
 import business.Dec2Bin;
+import business.Dec2Hex;
 import org.jdesktop.application.Action;
 import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
@@ -113,6 +114,7 @@ public class NumConvView extends FrameView {
         lbl_result = new javax.swing.JLabel();
         jtxtResult = new javax.swing.JTextField();
         jbtnClear = new javax.swing.JButton();
+        rdo_decToHex = new javax.swing.JRadioButton();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
@@ -192,6 +194,15 @@ public class NumConvView extends FrameView {
             }
         });
 
+        buttonGroup1.add(rdo_decToHex);
+        rdo_decToHex.setText(resourceMap.getString("rdo_decToHex.text")); // NOI18N
+        rdo_decToHex.setName("rdo_decToHex"); // NOI18N
+        rdo_decToHex.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rdo_decToHexItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
@@ -200,31 +211,35 @@ public class NumConvView extends FrameView {
                 .addContainerGap()
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jradB2D)
-                                .addGap(18, 18, 18)
-                                .addComponent(jradD2B))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(65, Short.MAX_VALUE))
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane1))
+                            .addGroup(mainPanelLayout.createSequentialGroup()
+                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(mainPanelLayout.createSequentialGroup()
+                                        .addComponent(lbl_value)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jtxtValue, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jbtnConvert))
+                                    .addGroup(mainPanelLayout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jradB2D)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jradD2B)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(rdo_decToHex)))
+                                .addGap(0, 28, Short.MAX_VALUE)))
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(lbl_result)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jtxtResult, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(135, 135, 135))))
-            .addGroup(mainPanelLayout.createSequentialGroup()
-                .addGap(91, 91, 91)
-                .addComponent(lbl_value)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jtxtValue, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jbtnConvert)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jbtnClear)
@@ -237,7 +252,8 @@ public class NumConvView extends FrameView {
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jradB2D)
-                    .addComponent(jradD2B))
+                    .addComponent(jradD2B)
+                    .addComponent(rdo_decToHex))
                 .addGap(28, 28, 28)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_value)
@@ -292,11 +308,11 @@ public class NumConvView extends FrameView {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 318, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 390, Short.MAX_VALUE)
                 .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statusAnimationLabel)
@@ -320,30 +336,32 @@ public class NumConvView extends FrameView {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnConvertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnConvertActionPerformed
+        
         statusMessageLabel.setText("");
-
         Conversion c;
 
         if (jradB2D.isSelected()) {
             c = new Bin2Dec(jtxtValue.getText());
         } else if (jradD2B.isSelected()) {
-                   c = new Dec2Bin(jtxtValue.getText());
-                   } else {
-                   
-               statusMessageLabel.setText("Unknown operation.");
-                    return;
-                   }
-            if (c.getErrorMessage().isEmpty()) {
-                ArrayList<String> steps = c.getProcessLog();
-                for (String step : steps) {
-                    jtxtSteps.append(step + "\n");
-                }
-                jtxtResult.setText(c.getResult());
-            }else {
-                statusMessageLabel.setText(c.getErrorMessage());
-           }
-    
-    /*     else if (jradD2B.isSelected()) {
+            c = new Dec2Bin(jtxtValue.getText());
+        } else if (rdo_decToHex.isSelected()) {
+            c = new Dec2Hex(jtxtValue.getText());
+        } 
+        else {
+            statusMessageLabel.setText("Unknown operation.");
+            return;
+        }
+        if (c.getErrorMessage().isEmpty()) {
+            ArrayList<String> steps = c.getProcessLog();
+            for (String step : steps) {
+                jtxtSteps.append(step + "\n");
+            }
+            jtxtResult.setText(c.getResult());
+        } else {
+            statusMessageLabel.setText(c.getErrorMessage());
+        }
+
+        /*     else if (jradD2B.isSelected()) {
             Dec2Bin d2b = new Dec2Bin(jtxtValue.getText());
             if (d2b.getErrorMessage().isEmpty()) {
                 ArrayList<String> steps = d2b.getProcessLog();
@@ -357,9 +375,7 @@ public class NumConvView extends FrameView {
         } else {
             statusMessageLabel.setText("Unknown operation.");
         } */
-        
-        
-        
+
     }//GEN-LAST:event_jbtnConvertActionPerformed
 
     private void jbtnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnClearActionPerformed
@@ -371,19 +387,26 @@ public class NumConvView extends FrameView {
     }//GEN-LAST:event_jbtnClearActionPerformed
 
     private void jradB2DItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jradB2DItemStateChanged
-        if(jradB2D.isSelected()) {
+        if (jradB2D.isSelected()) {
             lbl_value.setText(Bin2Dec.VALUEDESCRIPTION);
-            lbl_result.setText(Bin2Dec.RESULTDESCRIPTION);  
+            lbl_result.setText(Bin2Dec.RESULTDESCRIPTION);
         }
-         
+
     }//GEN-LAST:event_jradB2DItemStateChanged
 
     private void jradD2BItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jradD2BItemStateChanged
-        if(jradD2B.isSelected()) {
+        if (jradD2B.isSelected()) {
             lbl_value.setText(Dec2Bin.VALUEDESCRIPTION);
-            lbl_result.setText(Dec2Bin.RESULTDESCRIPTION);  
+            lbl_result.setText(Dec2Bin.RESULTDESCRIPTION);
         }
     }//GEN-LAST:event_jradD2BItemStateChanged
+
+    private void rdo_decToHexItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdo_decToHexItemStateChanged
+        if (rdo_decToHex.isSelected()) {
+            lbl_value.setText(Dec2Hex.VALUEDESCRIPTION);
+            lbl_result.setText(Dec2Hex.RESULTDESCRIPTION);
+        }
+    }//GEN-LAST:event_rdo_decToHexItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -402,6 +425,7 @@ public class NumConvView extends FrameView {
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JProgressBar progressBar;
+    private javax.swing.JRadioButton rdo_decToHex;
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;
     private javax.swing.JPanel statusPanel;
