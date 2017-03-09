@@ -30,6 +30,19 @@ public class Dec2Hex extends Dec2Num {
             return "Invalid value.";
         }
         
+        String hexdigits = "0123456789ABCDEF"; // positional values represent hex value needed
+            // a remainder indexed against the i value
+        
+            // alt 1
+   /*     for(Integer i : super.getRemainders()) {
+            this.hexresult += hexdigits.substring(i, i + 1);
+            
+            // alt 2
+            String hex = Integer.toHexString(i);            
+        }
+        return this.hexresult;
+            */
+        
         for(Integer i : super.getRemainders()) {
             
             if(i <= 9) {
