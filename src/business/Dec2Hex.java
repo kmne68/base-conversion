@@ -30,7 +30,8 @@ public class Dec2Hex extends Dec2Num {
             return "Invalid value.";
         }
         
-        String hexdigits = "0123456789ABCDEF"; // positional values represent hex value needed
+        // Alternate method
+ //       String hexdigits = "0123456789ABCDEF"; // positional values represent hex value needed
             // a remainder indexed against the i value
         
             // alt 1
